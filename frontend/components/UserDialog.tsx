@@ -10,7 +10,7 @@ interface UserDialogProps {
   onSubmit: (data: UserFormData) => void;
 }
 
-export function UserDialog({ isOpen, onClose, onSubmit }: UserDialogProps) {
+function UserDialog({ isOpen, onClose, onSubmit }: UserDialogProps) {
   const {
     register,
     handleSubmit,
@@ -75,7 +75,7 @@ export function UserDialog({ isOpen, onClose, onSubmit }: UserDialogProps) {
                       <input
                         type="text"
                         {...register('firstName', { required: true })}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                        className="mt-1 block w-full rounded-md border-1 border-gray-500 p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                       />
                       {errors.firstName && (
                         <p className="mt-1 text-xs text-red-600">Required</p>
@@ -89,7 +89,7 @@ export function UserDialog({ isOpen, onClose, onSubmit }: UserDialogProps) {
                       <input
                         type="text"
                         {...register('lastName', { required: true })}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                        className="mt-1 block w-full rounded-md border-1 border-gray-500 p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                       />
                       {errors.lastName && (
                         <p className="mt-1 text-xs text-red-600">Required</p>
@@ -107,7 +107,7 @@ export function UserDialog({ isOpen, onClose, onSubmit }: UserDialogProps) {
                         required: true,
                         pattern: /^\S+@\S+$/i,
                       })}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border-1 border-gray-500 p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     />
                     {errors.email && (
                       <p className="mt-1 text-xs text-red-600">
@@ -122,7 +122,7 @@ export function UserDialog({ isOpen, onClose, onSubmit }: UserDialogProps) {
                     </label>
                     <select
                       {...register('gender', { required: true })}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border-1 border-gray-500 p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     >
                       <option value="">Select gender</option>
                       {(['male', 'female', 'other'] as Gender[]).map((gender) => (
@@ -141,14 +141,14 @@ export function UserDialog({ isOpen, onClose, onSubmit }: UserDialogProps) {
                       Description
                     </label>
                     <textarea
-                      {...register('description', {
+                      {...register('shortDescription', {
                         required: true,
                         maxLength: 200,
                       })}
                       rows={3}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border-1 border-gray-500 p-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     />
-                    {errors.description && (
+                    {errors.shortDescription && (
                       <p className="mt-1 text-xs text-red-600">
                         Required (max 200 characters)
                       </p>
@@ -179,3 +179,5 @@ export function UserDialog({ isOpen, onClose, onSubmit }: UserDialogProps) {
     </Transition>
   );
 }
+
+export default UserDialog;

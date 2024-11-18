@@ -1,42 +1,23 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Delete,
-  Body,
-  Param,
-  HttpCode,
-  HttpStatus,
-} from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Post, Delete, Body, Param, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './interfaces/user.interface';
+import { User } from './user.entity';
 
-@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
-  @ApiOperation({ summary: 'Create user' })
-  @ApiResponse({ status: 201, description: 'User created successfully.' })
-  create(@Body() createUserDto: CreateUserDto): User {
-    return this.usersService.create(createUserDto);
+  @Get()
+  findAll(@Query('page') page: number, @Query('limit') limit: number): Promise<User[]> {
+    return this.usersService.findAll(page, limit);
   }
 
-  @Get()
-  @ApiOperation({ summary: 'Get all users' })
-  @ApiResponse({ status: 200, description: 'Return all users.' })
-  findAll(): User[] {
-    return this.usersService.findAll();
+  @Post()
+  create(@Body() userData: Omit<User, 'id'>): Promise<User> {
+    return this.usersService.create(userData);
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiOperation({ summary: 'Delete user' })
-  @ApiResponse({ status: 204, description: 'User deleted successfully.' })
-  remove(@Param('id') id: string): void {
-    this.usersService.remove(id);
+  remove(@Param('id') id: string): Promise<void> {
+    return this.usersService.remove(id);
   }
 }

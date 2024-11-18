@@ -9,7 +9,18 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "backend:dev": "cd backend && nest start --watch",
-    "backend:build": "cd backend && nest build"
+    "backend:build": "cd backend && nest build",
+    "backend:format": "cd backend && prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "backend:start": "cd backend && nest start",
+    "backend:start:dev": "cd backend && nest start --watch",
+    "backend:start:debug": "cd backend && nest start --debug --watch",
+    "backend:start:prod": "cd backend && node dist/main",
+    "backend:lint": "cd backend && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "backend:test": "cd backend && jest",
+    "backend:test:watch": "cd backend && jest --watch",
+    "backend:test:cov": "cd backend && jest --coverage",
+    "backend:test:debug": "cd backend && node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "backend:test:e2e": "cd backend && jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
@@ -17,6 +28,7 @@
     "@nestjs/core": "^10.3.3",
     "@nestjs/platform-express": "^10.3.3",
     "@nestjs/swagger": "^7.3.0",
+    "@nestjs/typeorm": "^10.0.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "clsx": "^2.1.0",
@@ -24,9 +36,12 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.51.0",
+    "redis": "^4.7.0",
     "reflect-metadata": "^0.2.1",
     "rxjs": "^7.8.1",
-    "tailwind-merge": "^2.2.1"
+    "sqlite3": "^5.1.7",
+    "tailwind-merge": "^2.2.1",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
